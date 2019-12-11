@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: php:7.2.2-apache
+    container_name: udemyPHP
+    depends_on:
+      - db
+    volumes:
+      - ./php/:/var/www/html/
+    ports:
+      - "8101:80"
+    stdin_open: true
+    tty: true
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "9907:3306"
+    container_name: udemyPHP_db
